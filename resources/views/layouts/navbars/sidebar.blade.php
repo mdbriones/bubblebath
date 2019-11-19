@@ -7,6 +7,7 @@
       <img src="" alt="">
       {{ __('BubbleBath') }}
     </a>
+    
   </div>
   <div class="sidebar-wrapper" id="sidebar-wrapper">
     <ul class="nav">
@@ -18,7 +19,7 @@
       </li>
       <li>
         <a data-toggle="collapse" href="#carwashTab">
-            <i class="fa fa-car"></i>
+          <i class="fa fa-car"></i>
           <p>
             {{ __("Carwash") }}
             <b class="caret"></b>
@@ -26,14 +27,14 @@
         </a>
         <div class="collapse show" id="carwashTab">
           <ul class="nav">
-            <li class="@if ($activePage == 'profile') active @endif">
-              <a href="{{ route('profile.edit') }}">
+            <li class="@if ($activePage == 'Carwash Information') active @endif">
+              <a href="{{ route('carwash.information') }}">
                 <i class="now-ui-icons users_single-02"></i>
                 <p> {{ __("Client Information") }} </p>
               </a>
             </li>
-            <li class="@if ($activePage == 'users') active @endif">
-              <a href="{{ route('user.index') }}">
+            <li class="@if ($activePage == 'carwash history') active @endif">
+              <a href="{{ route('carwash.history') }}">
                 <i class="now-ui-icons files_paper"></i>
                 <p> {{ __("Carwash History") }} </p>
               </a>
@@ -41,7 +42,33 @@
           </ul>
         </div>
       </li>
-      <li class="@if ($activePage == 'icons') active @endif">
+
+      <li>
+        <a data-toggle="collapse" href="#shopTab">
+          <i class="fa fa-car"></i>
+          <p>
+            {{ __("Shop") }}
+            <b class="caret"></b>
+          </p>
+        </a>
+        <div class="collapse show" id="shopTab">
+          <ul class="nav">
+            <li class="@if ($activePage == 'Shop Information') active @endif">
+              <a href="{{ route('shop.information') }}">
+                <i class="now-ui-icons users_single-02"></i>
+                <p> {{ __("Client Information") }} </p>
+              </a>
+            </li>
+            {{-- <li class="@if ($activePage == 'carwash history') active @endif">
+              <a href="{{ route('shop.history') }}">
+                <i class="now-ui-icons files_paper"></i>
+                <p> {{ __("Shop History") }} </p>
+              </a>
+            </li> --}}
+          </ul>
+        </div>
+      </li>
+      {{-- <li class="@if ($activePage == 'icons') active @endif">
         <a href="{{ route('page.index','icons') }}">
           <i class="now-ui-icons education_atom"></i>
           <p>{{ __('Icons') }}</p>
@@ -76,7 +103,7 @@
           <i class="now-ui-icons arrows-1_cloud-download-93"></i>
           <p>{{ __('Upgrade to PRO') }}</p>
         </a>
-      </li>
+      </li> --}}
     </ul>
   </div>
 </div>
