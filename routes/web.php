@@ -25,8 +25,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('saveCarwashService', 'CarwashController@store')->name('saveCarwashService');
 	Route::get('carwashHistory', 'CarwashController@showCarwashHistory')->name('carwash.history');
 	Route::get('carwashRecord', 'CarwashController@showRecord')->name('history.record');
-
+	
 	Route::get('shopInformation', 'ShopController@showShop')->name('shop.information');
+	Route::post('saveShopService', 'ShopController@store')->name('saveShopService');
 
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);

@@ -518,74 +518,47 @@ $(document).ready(function(){
         $("#totalAmount").html(totalAmount.toLocaleString("en"));
     }
 
-
-    $("#btnSubmit").on('click', function(e){
-        let conf = confirm("Press OK to continue.");
-        var platenumber = document.getElementById("platenumber").value;
-
-        if(conf == true){
-            if(platenumber != ""){
-                var name = document.getElementById("cname").value;
-                var model = document.getElementById("model").value;
-                var serviceDate = document.getElementById("service_date").value;
-                var email = document.getElementById("email").value;
-
-                var _BodyWash = document.getElementById('txtBodyWash').value;
-                var _HandWax = document.getElementById('txtHandWax').value;
-                var _EngineWash = document.getElementById('txtEngineWash').value;
-                var _Armor = document.getElementById('txtArmor').value;
-                var _Orbital = document.getElementById('txtOrbital').value;
-                var _UnderWash = document.getElementById('txtUnderWash').value;
-                var _AsphaltRem = document.getElementById('txtAsphaltRem').value;
-                var _SeatCover = document.getElementById('txtSeatCover').value;
-                var _Leather = document.getElementById('txtLeather').value;
-                var _Interior = document.getElementById('txtInterior').value;
-                var _Exterior = document.getElementById('txtExterior').value;
-                var _GlassDetail = document.getElementById('txtGlassDetail').value;
-                var _EngineDetail = document.getElementById('txtEngineDetail').value;
-                var _Full = document.getElementById('txtFull').value;
-                
-                var payment_method = document.getElementById("payment_method").value;
-                
-                var group_shift = document.getElementById("group_shift").value;
-
-                $.ajax({
-                    type: "post",
-                    url: "_POST/customerService_insert.php",
-                    data: {"name": name,
-                            "model": model,
-                            "email": email,
-                            "platenumber": platenumber,
-                            "serviceDate": serviceDate,
-                            "_BodyWash": _BodyWash,
-                            "_HandWax": _HandWax,
-                            "_EngineWash": _EngineWash,
-                            "_Armor": _Armor,
-                            "_Orbital": _Orbital,
-                            "_UnderWash": _UnderWash,
-                            "_AsphaltRem": _AsphaltRem,
-                            "_SeatCover": _SeatCover,
-                            "_Leather": _Leather,
-                            "_Interior": _Interior,
-                            "_Exterior": _Exterior,
-                            "_GlassDetail": _GlassDetail,
-                            "_EngineDetail": _EngineDetail,
-                            "_Full": _Full,
-                            "_payment_method": payment_method,
-                            "group_shift": group_shift},
-                    success: function(data){
-                        alert(data);
-                        setTimeout(function(){
-                            window.location.href = "index.php";
-                        },500);
-                    }
-                });
-            }else{
-                alert("Please provide the Plate Number");
-            }
-        }
+    var total = 0;
+    $('#addRow').on('click', () => {
+        $('#tbl_tbody').append('<tr>'+
+                            '<td colspan="2"> <input type="text" placeholder="Enter Description" class="form-control" name="desc[]"> </td>'+
+                            '<td> <input type="number" placeholder="0" name="txtAmt[]" class="form-control computeTotal"> </td>'+
+                            '<td style="text-align-last: right;">'+
+                                '<button class="removeRow btn btn-danger" style="height: 20px; padding-top:2px;"><i class="fa fa-trash"></i></button>'+
+                            '</td>'+
+                        '</tr>');
     });
 
-    
+    $('#tableServices').on('click', '.removeRow', function(){
+        $(this).closest('tr').find(".computeTotal").each(function() {
+            var inputAmt = $(this).closest('tr').find(".computeTotal").val();
+            var total = parseFloat($("#totalAmount").text());
+            total -= parseFloat(inputAmt);
+            alert(inputAmt);
+            $("#totalAmount").html(total.toFixed(2).toLocaleString("en"));
+        });
+        $(this).closest('tr').remove();
+    });
 
+    $('#tableServices').on('keyup', '.computeTotal', function(){
+        var sum = 0;
+        //iterate through each amount and add the values
+        $(".computeTotal").each(function() {
+            //add only if the value is number
+            if (!isNaN(this.value) && this.value.length != 0) {
+                sum += parseFloat(this.value);
+                $(this).css("background-color", "#FEFFB0");
+            }else if (this.value.length != 0){
+                $(this).css("background-color", "red");
+            }
+        });
+        
+        $("#totalAmount").html(sum.toFixed(2).toLocaleString("en"));
+    });
+
+    $("input").keydown(function(event) {
+        if (event.keyCode == 13) {
+            event.preventDefault();
+        }
+    });
 });
