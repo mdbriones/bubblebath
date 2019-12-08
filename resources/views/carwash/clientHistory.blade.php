@@ -13,11 +13,10 @@
       <div class="col-md-12">
         <div class="card">
           <div class="card-header">
-              {{-- <a class="btn btn-primary btn-round text-white pull-right" href="{{ route('user.create') }}">{{ __('Add user') }}</a> --}}
-            <table width="100%">
+            <table width="100%" style="margin-bottom: -20px;">
                 <tr>
                   <td>
-                      <h4 class="card-title">{{ __('Client\'s History') }}</h4>
+                      <img src="{{ asset('assets/img/carwash-history.png') }}" style="width: 80px; height: 65px; -webkit-filter: grayscale(1); opacity: 0.2; filter: grayscale(1); z-index: -1;">
                   </td>
                   <td style="width: 200px;  ">
                       <form method="get" action="{{ route('history.record') }}" autocomplete="off" enctype="multipart/form-data">
@@ -34,6 +33,7 @@
                 </tr>
               </table>
           </div>
+          <hr>
           <div class="card-body">
             <div class="toolbar">
               @if (isset($plateNumber))
@@ -163,27 +163,3 @@
       </script>
   </div>
 @endsection
-
-{{-- @push('js') --}}
-  
-  {{-- <script>
-    $(document).ready(function() {
-      $('#datatable').DataTable({
-        "pagingType": "full_numbers",
-        "lengthMenu": [
-          [10, 25, 50, -1],
-          [10, 25, 50, "All"]
-        ],
-        responsive: true,
-        language: {
-          search: "_INPUT_",
-          searchPlaceholder: "Search records",
-        }
-      });
-
-
-    });
-  </script> --}}
-
-  
-{{-- @endpush --}}

@@ -3,8 +3,8 @@
     @csrf
 </form>
 @include('layouts.navbars.sidebar')
-<div class="main-panel">
+<div class="main-panel" style="background-image: linear-gradient(to right, #0F2A4B , #295483);">
     @include('layouts.navbars.navs.auth')
     @yield('content')
-    @include('layouts.footer')
+    {{-- @include('layouts.footer') --}}
 </div>

@@ -25,7 +25,8 @@ class ShopValidation extends FormRequest
     {
         return [
             'model' => 'bail|required',
-            'plateNumber' => 'bail|required'
+            'plateNumber' => 'bail|required',
+            'dateOfService' => 'bail|required'
         ];
     }
 }

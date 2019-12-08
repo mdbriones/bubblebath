@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer class="footer" style="background-color: red;">
   <div class=" container-fluid ">
     <nav>
       <ul>

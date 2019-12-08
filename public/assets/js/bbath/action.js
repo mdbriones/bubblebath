@@ -534,7 +534,6 @@ $(document).ready(function(){
             var inputAmt = $(this).closest('tr').find(".computeTotal").val();
             var total = parseFloat($("#totalAmount").text());
             total -= parseFloat(inputAmt);
-            alert(inputAmt);
             $("#totalAmount").html(total.toFixed(2).toLocaleString("en"));
         });
         $(this).closest('tr').remove();

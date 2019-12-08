@@ -37,7 +37,7 @@ class CreateCarwashTable extends Migration
             $table->string('payment_method');
             $table->integer('paid')->comment('0-UnPaid, 1-Paid')->default(0);
             $table->timestamps();
-            $table->integer('id_delete')->default(0);
+            $table->integer('is_delete')->default(0);
         });
     }
 

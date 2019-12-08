@@ -9,7 +9,7 @@
   </div>
   <div class="content">
     <div class="row">
-      <div class="col-md-6" style="overflow: scroll; height: 600px;">
+      <div class="col-md-6 col-sm-11" style="overflow: scroll; height: 600px;">
         <div class="card">
           <div class="card-header">
             <h5 class="title">{{__(" Information")}}</h5>
@@ -80,7 +80,7 @@
                     <select name="carSize" id="carSize" class="form-control">
                       <option value="">Select Car Size</option>
                       <option value="s">Small</option>
-                      <option value="md">Meduim</option>
+                      <option value="md">Medium</option>
                       <option value="lg">Large</option>
                     </select>
                   </div>
@@ -291,7 +291,7 @@
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-6 col-sm-11">
         <div class="card">
           <div class="card-body">
             <table width="100%">

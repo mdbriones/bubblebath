@@ -30,7 +30,7 @@ class Carwash extends Model
         'full',
         'payment_method',
         'paid',
-        'emp_group',
+        'shift',
         'is_delete'
     ];
 

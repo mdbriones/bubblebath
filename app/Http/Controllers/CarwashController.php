@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class CarwashController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function showService()
     {
         return view('carwash.clientCarwash');
@@ -17,7 +22,6 @@ class CarwashController extends Controller
 
     public function store(CustomerValidation $request)
     {
-        // $user = Auth::user();
         $data = $request->toArray();
         if(Carwash::create($data)){
             return redirect()->route('carwash.information')->with('message', 'Succesfully saved!');
