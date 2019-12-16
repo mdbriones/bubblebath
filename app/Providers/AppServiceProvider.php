@@ -38,13 +38,10 @@ class AppServiceProvider extends ServiceProvider
 
         $criticalStocks = new Stocks();
         $checkStocks = Stocks::where('quantity', '<', 10)->count();
-        // dd($checkStocks);
         if($checkStocks > 0){
             $notification += $checkStocks;
             $criticalStocks = Stocks::where('quantity', '<', 10)->get();
         }
-
-        // dd($setSchedule, $checkStocks);
 
         View::share('notification', $notification);
         View::share('checkStocks', $checkStocks);
