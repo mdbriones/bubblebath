@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Schedule;
+use App\Stocks;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -22,6 +25,11 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
+    {
+        return view('carwashInformation');
+    }
+
+    public function adminHome()
     {
         return view('home');
     }

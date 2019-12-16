@@ -8,6 +8,12 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class ProfileRequest extends FormRequest
 {
+    public $email;
+    
+    public function __construct($email)
+    {
+        $this->email = $email;
+    }
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,11 +29,16 @@ class ProfileRequest extends FormRequest
      *
      * @return array
      */
+
     public function rules()
     {
+        // User::find()
+        // $email = $this->route('email');
+        // dd($this->email);
+        
         return [
             'name' => ['required', 'min:3'],
-            'email' => ['required', 'email', Rule::unique((new User)->getTable())->ignore(auth()->id())],
+            'email' => ['required', 'email', Rule::unique((new User)->getTable())->ignore(5)],
             'photo' => ['nullable', 'image'],
         ];
     }

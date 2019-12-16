@@ -23,7 +23,7 @@
                 <table width="100%">
                     <tr>
                         <td colspan="2">
-                            <label style="font-size: 20px; color: #142554;"> {{ $format_text }} </label>
+                            <label style="font-size: 20px; color: #142554;"> {{ $format_text ?? '' }} </label>
                         </td>
                     </tr>
                     <tr>
@@ -71,11 +71,13 @@
                     </tr>
                 </table>
             </form>  
-            <table id="example" class="table" style="width:100%;">
+            <br>
+            <table id="example" class="table" style="width:100%;" border="1">
                 <tbody id="tbl_tbody">
-                    <tr>
-                        <td colspan="2" style="text-align-last:center;"><label>Morning Shift</label></td>
-                        <td colspan="2" style="text-align-last:center; border-left:2pt solid #3e3f4b;"><label>Afternoon Shift</label></td>
+                    {{-- <tr>
+                        <td></td>
+                        <td style="text-align-last:center;"><label>70 %</label></td>
+                        <td style="text-align-last:center; border-left:2pt solid #3e3f4b;"><label>30 %</label></td>
                     </tr>
                     <tr>
                         <td colspan="5" style="background-color: #3e3f4b"></td>
@@ -106,26 +108,26 @@
                     </tr>
                     <tr>
                         <td colspan="4" style="border: none;"></td>
-                    </tr>
-                    <tr>
+                    </tr> --}}
+                    <tr style="background-color: #3e3f4b">
                         <td colspan="4" style="text-align-last: left;"><strong><label>Today's Carwash Income</label></strong></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td><label>Owner (70%)</label></td>
-                        <td>₱ {{ isset($totalIncomeOwner) ? number_format($totalIncomeOwner, 2) : '0.00' }}</td>
+                        <td style="text-align-last: right;"><label style="float: left;">₱</label> {{ isset($totalIncomeOwner) ? number_format($totalIncomeOwner, 2) : '0.00' }}</td>
                         <td></td>
                     </tr>
                     <tr>
                         <td></td>
                         <td><label>Employee (30%)</label></td>
-                        <td>₱ {{ isset($totalIncomeEmployee) ? number_format($totalIncomeEmployee, 2) : '0.00' }}</td>
+                        <td style="text-align-last: right;"><label style="float: left;">₱</label> {{ isset($totalIncomeEmployee) ? number_format($totalIncomeEmployee, 2) : '0.00' }}</td>
                         <td></td>
                     </tr>
-                    <tr style="border-top:2pt solid #3e3f4b;">
+                    <tr style="border-top:5pt solid #3e3f4b;">
                         <td></td>
                         <td><label>Overall</label></td>
-                        <td>₱ {{ isset($totalIncome) ? number_format($totalIncome, 2) : '0.00' }}</td>
+                        <td style="text-align-last: right;"><label style="float: left;">₱</label> {{ isset($totalIncome) ? number_format($totalIncome, 2) : '0.00' }}</td>
                         <td></td>
                     </tr>
                 </tbody>

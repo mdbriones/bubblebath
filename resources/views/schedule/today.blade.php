@@ -14,7 +14,7 @@
       <div class="col-sm-6 col-md-6" style="margin-top: -30px; height: 500px; margin-bottom: 50px;">
         <div class="card" style="background-color: #ecfbe0; min-height: 500px; max-height: 500px; overflow-y: scroll;">
           <div class="card-header">
-            <label><h6 class="title">{{__(" Morning Schedule")}}</h6></label>
+            <label><h6 class="title">{{__(" Today Schedule")}}</h6></label>
               @if(session()->has('message'))
                   <div class="alert alert-success">
                       {{ session()->get('message') }}
@@ -34,11 +34,11 @@
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="schedule_time">Select Shift</label>
+                    {{-- <label for="schedule_time">Select Shift</label>
                     <select name="schedule_time" id="schedule_time" class="form-control">
                       <option value="am" {{ old('schedule_time') == 'am' ? 'selected' : '' }} > 7AM - 2PM </option>
                       <option value="pm" {{ old('schedule_time') == 'pm' ? 'selected' : '' }} > 2PM onwards </option>
-                    </select>
+                    </select> --}}
                     <hr>
                     <table id="tableServices" class="table table-striped" style="width:100%">
                       <thead>
@@ -91,8 +91,8 @@
                 <button class="btn btn-info btn-sm" type="submit" id="viewToday" style="width: 100%;">View today Schedule</button>
               </form>
               <div align="center">
-                @if (isset($data_am))
-                  @if ($data_am != "null")
+                @if (isset($data))
+                  @if ($data != "null")
                     <button class="btn btn-sm btn-warning" id="editToday" type="button" style="width: 100%;"><i>Edit today Schedule</i></button>
                   @else
                     <label><i>No record found</i></label>
@@ -104,41 +104,13 @@
             <div class="card-body">
               <div class="row">
                   <div class="col-md-12">
-                    <table width="100%" id="group1">
-                      <thead>
-                        @if (isset($data_am))
-                          @if ($data_am != "null")
-                          <tr style="text-align-last: center;">
-                            <td><h6 style="font-size: 20px;">{{ __('Morning') }}</label></td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                          </tr>
-                          @endif
-                        @endif
-                      </thead>
-                      <tbody id="groupAM">
-                        @if (isset($data_am))
-                          @if ($data_am != "null")
-                            @foreach ($data_am as $am)
-                              <tr style="text-align-last: center;">
-                                <td><label> {{ $am->name }} </label></td>
-                              </tr>
-                            @endforeach
-                          @endif
-                        @endif
-                      </tbody>
-                    </table>
-                  </div>
-                  
-                  <div class="col-md-12">
                     <table width="100%" id="group2">
                       <thead>
                         <th>
-                          @if (isset($data_pm))
-                            @if ($data_pm != "null")
+                          @if (isset($data))
+                            @if ($data != "null")
                               <tr style="text-align-last: center;">
-                                <td colspan=><h6 style="font-size: 18px;">{{ __('Afternoon') }}</h6></label>
+                                <td colspan=><h6 style="font-size: 18px;">{{ __('Schedule for Today') }}</h6></label>
                               </tr>
                               <tr>
                                 <td></td>
@@ -148,11 +120,11 @@
                         </th>
                       </thead>
                       <tbody id="groupPM">
-                         @if (isset($data_pm))
-                          @if ($data_pm != "null")
-                            @foreach ($data_pm as $pm)
+                         @if (isset($data))
+                          @if ($data != "null")
+                            @foreach ($data as $d)
                               <tr style="text-align-last: center;">
-                                <td><label> {{ $pm->name }} </label></td>
+                                <td><label> {{ $d->name }} </label></td>
                               </tr>
                             @endforeach
                           @endif

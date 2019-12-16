@@ -83,7 +83,7 @@
                     <th style="font-size: 15px;">{{ __('Client') }}</th>
                     <th style="font-size: 15px;">{{ __('Model') }}</th>
                     <th style="font-size: 15px;">{{ __('Plate#') }}</th>
-                    <th style="font-size: 15px;">{{ __('Group Shift') }}</th>
+                    {{-- <th style="font-size: 15px;">{{ __('Group Shift') }}</th> --}}
                     <th style="font-size: 15px;">{{ __('Services Done') }}</th>
               </thead>
               <tbody>
@@ -94,7 +94,7 @@
                         <td>{{ $record->customerName }}</td>
                         <td>{{ $record->model }}</td>
                         <td>{{ $record->plateNumber }}</td>
-                        <td>{{ $record->shift == 'am' ? 'Morning' : 'Afternoon' }}</td>
+                        {{-- <td>{{ $record->shift == 'am' ? 'Morning' : 'Afternoon' }}</td> --}}
                         @php
                           $services = "";
                         @endphp

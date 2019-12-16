@@ -37,8 +37,7 @@ class ScheduleController extends Controller
                     'schedule_date' => [
                         'required',
                         Rule::unique('schedules')->where(function ($query) use($data) {
-                            $query->where('schedule_date', $data['schedule_date'])
-                                    ->where('schedule_time', $data['schedule_time']);
+                            $query->where('schedule_date', $data['schedule_date']);
                         })
                     ],
                     'worker.*' => 'required'
@@ -62,29 +61,28 @@ class ScheduleController extends Controller
     {
         $date_ = $request->input('dateNow');
 
-        $morning = Schedule::where('schedule_date', $date_)->where('schedule_time', 'am')->first();
-        $afternoon = Schedule::where('schedule_date', $date_)->where('schedule_time', 'pm')->first();
+        // $morning = Schedule::where('schedule_date', $date_)->where('schedule_time', 'am')->first();
+        // $afternoon = Schedule::where('schedule_date', $date_)->where('schedule_time', 'pm')->first();
 
-        if($morning != null)
-            $data_am = Schedule::where('schedule_date', $date_)->where('schedule_time', 'am')->get();
-        else
-            $data_am = "null";
+        // if($morning != null)
+            $data = Schedule::where('schedule_date', $date_)->get();
+        // else
+        //     $data_am = "null";
 
-        if($afternoon != null)
-            $data_pm = Schedule::where('schedule_date', $date_)->where('schedule_time', 'pm')->get();
-        else
-            $data_pm = "null";
+        // if($afternoon != null)
+        //     $data_pm = Schedule::where('schedule_date', $date_)->where('schedule_time', 'pm')->get();
+        // else
+        //     $data_pm = "null";
         
-        return view('schedule.today', compact('data_am', 'data_pm', 'date_'));
+        return view('schedule.today', compact('data', 'date_'));
     }
 
     public function viewEditTodaySched(Request $request)
     {
         $date_ = Carbon::parse(now())->format("Y-m-d");
-        $morning = Schedule::where('schedule_date', $date_)->where('schedule_time', 'am')->get();
-        $afternoon = Schedule::where('schedule_date', $date_)->where('schedule_time', 'pm')->get();
+        $dataView = Schedule::where('schedule_date', $date_)->get();
 
-        return view('schedule.editToday', compact('morning', 'afternoon', 'date_'));
+        return view('schedule.editToday', compact('dataView', 'date_'));
     }
 
     public function getWorkersToday(Request $request)
@@ -104,10 +102,8 @@ class ScheduleController extends Controller
     public function updateGroup(Request $request)
     {
         $data = $request->all();
-        // dd($data);
         $record = Schedule::find($data['edit_id']);
         $record->name = $request->edit_name;
-        // dd($record);
         $record->save();
         
         $date_ = $record->schedule_date;
@@ -126,7 +122,6 @@ class ScheduleController extends Controller
         $request['schedule_date'] = Carbon::parse(now())->format("Y-m-d");
         $data = $request->all();
         $data['name'] = $request['addedName'];
-        $data['schedule_time'] = $request['shift'];
         
         Schedule::create($data);
     }

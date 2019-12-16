@@ -307,18 +307,18 @@
             </table>
             <hr>
             <div class="row">
-              <div class="col-md-4 pr-1">
+              <div class="col-md-12 col-sm-12">
                 <div class="form-group">
                   <label>{{__(" Mode of Payment :")}}</label>
                   <div class="form-group">
-                    <select name="payment_method" id="payment_method" class="form-control" style="width: 200px;">
+                    <select name="payment_method" id="payment_method" class="form-control">
                       <option value="cash">Cash</option>
                       <option value="credit">Credit</option>
                     </select>
                   </div>
                 </div>
 
-                <div class="form-group">
+                {{-- <div class="form-group">
                   <label>{{__(" Worker's Category :")}}</label>
                   <div class="form-group">
                     <select name="shift" id="shift" class="form-control" style="width: 200px;">
@@ -326,9 +326,10 @@
                       <option value="pm">Afternoon Shift</option>
                     </select>
                   </div>
-                </div>
+                </div> --}}
               </div>
             </div>
+            <hr>
           </div>
           <div class="button-container" >
             <div class="card-footer ">

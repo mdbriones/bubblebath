@@ -36,6 +36,142 @@
         -webkit-appearance: none;
         display: none;
   }
+  .notification {
+    color: white;
+    text-decoration: none;
+    padding: 15px 26px;
+    position: relative;
+    display: inline-block;
+    border-radius: 2px;
+  }
+  .notification .badge {
+    position: absolute;
+    top: 0px;
+    right: 38px;
+    padding: 5px 10px;
+    border-radius: 60%;
+    background: red;
+    color: white;
+  }
+
+  .carousel-control-prev, .carousel-control-next-icon {
+    filter: invert(50%);
+  }  
+</style>
+
+<style>
+.notification-bell {
+  animation: bell 1s 1s both infinite;
+}
+.notification-bell * {
+  display: block;
+  margin: 0 auto;
+  background-color: #9adfff;
+  box-shadow: 0px 0px 15px #9adfff;
+}
+.bell-top {
+  width: 6px;
+  height: 6px;
+  border-radius: 3px 3px 0 0;
+}
+.bell-middle {
+  width: 18px;
+  height: 18px;
+  margin-top: -1px;
+  border-radius: 12.5px 12.5px 0 0;
+}
+.bell-bottom {
+  position: relative;
+  z-index: 0;
+  width: 22px;
+  height: 2px;
+}
+.bell-bottom::before,
+.bell-bottom::after {
+  content: '';
+  position: absolute;
+  top: -4px;
+}
+.bell-bottom::before {
+  left: 1px;
+  border-bottom: 4px solid #fff;
+  border-right: 0 solid transparent;
+  border-left: 4px solid transparent;
+}
+.bell-bottom::after {
+  right: 1px;
+  border-bottom: 4px solid #fff;
+  border-right: 4px solid transparent;
+  border-left: 0 solid transparent;
+}
+.bell-rad {
+  width: 5px;
+  height: 4px;
+  margin-top: 2px;
+  border-radius: 0 0 4px 4px;
+  animation: rad 1s 2s both infinite;
+}
+.notification-count {
+  padding-left: 7px;
+  position: absolute;
+  z-index: 1;
+  top: 0px;
+  right: 20px;
+  width: 23px;
+  height: 23px;
+  line-height: 23px;
+  font-size: 15px;
+  border-radius: 50%;
+  background-color: #ff4927;
+  color: #fff;
+  animation: zoom 1s 1s both infinite;
+}
+@keyframes bell {
+  0% { transform: rotate(0); }
+  10% { transform: rotate(30deg); }
+  20% { transform: rotate(0); }
+  80% { transform: rotate(0); }
+  90% { transform: rotate(-30deg); }
+  100% { transform: rotate(0); }
+}
+@keyframes rad {
+  0% { transform: translateX(0); }
+  10% { transform: translateX(6px); }
+  20% { transform: translateX(0); }
+  80% { transform: translateX(0); }
+  90% { transform: translateX(-6px); }
+  100% { transform: translateX(0); }
+}
+@keyframes zoom {
+  0% { opacity: 0; transform: scale(0); }
+  10% { opacity: 1; transform: scale(1); }
+  50% { opacity: 1; }
+  51% { opacity: 0; }
+  100% { opacity: 0; }
+}
+@keyframes moon-moving {
+  0% {
+    transform: translate(-200%, 600%);
+  }
+  100% {
+    transform: translate(800%, -200%);
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 990px) {
+  #id_notif { display: none; } 
+}
+@media screen and (min-width: 990px) and (max-width: 1624px) {
+  #id_notif { display: block; }  
+}
+
+@media screen and (min-width: 0px) and (max-width: 990px) {
+  #small_screen_notif { display: block; } 
+}
+@media screen and (min-width: 990px) and (max-width: 1624px) {
+  #small_screen_notif { display: none; }  
+}
+
 </style>
 <body class="{{ $class ?? '' }}">
   <div class="wrapper" >

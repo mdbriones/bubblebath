@@ -9,7 +9,7 @@
   </div>
   <div class="sidebar-wrapper" id="sidebar-wrapper">
     <ul class="nav">
-      <li class="@if ($activePage == 'home') active @endif">
+      <li class="@if ($activePage == 'home') active @endif" style="@if (Auth::user()->is_admin == '') display:none @endif">
         <a href="{{ route('home') }}">
           <i class="now-ui-icons design_app"></i>
           <p>{{ __('Dashboard') }}</p>
@@ -76,7 +76,7 @@
         </div>
       </li>
 
-      <li class="@if ($activePage == 'receivableCarwash' || $activePage == 'receivableShop') active @endif">
+      <li style="@if (Auth::user()->is_admin == '') display:none @endif" class="@if ($activePage == 'receivableCarwash' || $activePage == 'receivableShop') active @endif">
         <a  @if ($activePage == 'receivableCarwash' || $activePage == 'receivableShop')
               style="color: #332a5c;"
             @endif data-toggle="collapse" href="#receivableTab">
@@ -106,7 +106,7 @@
         </div>
       </li>
 
-      <li class="@if ($activePage == 'reportsCarwash' || $activePage == 'reportsShop') active @endif">
+      <li style="@if (Auth::user()->is_admin == '') display:none @endif" class="@if ($activePage == 'reportsCarwash' || $activePage == 'reportsShop') active @endif">
         <a @if ($activePage == 'reportsCarwash' || $activePage == 'reportsShop')
             style="color: #332a5c;"
           @endif data-toggle="collapse" href="#reportsTab">
@@ -136,7 +136,7 @@
         </div>
       </li>
 
-      <li class="@if ($activePage == 'todaySched' || $activePage == 'pastSChed') active @endif">
+      <li style="@if (Auth::user()->is_admin == '') display:none @endif" class="@if ($activePage == 'todaySched' || $activePage == 'pastSChed') active @endif">
         <a @if ($activePage == 'todaySched' || $activePage == 'pastSChed')
           style='color: #332a5c;'
           @endif data-toggle="collapse" href="#productivityTab">
@@ -166,7 +166,7 @@
         </div>
       </li>
 
-    <li class="@if ($activePage == 'encodeStocks' || $activePage == 'outworks/parts' || $activePage == 'shares') active @endif">
+      <li style="@if (Auth::user()->is_admin == '') display:none @endif" class="@if ($activePage == 'encodeStocks' || $activePage == 'outworks/parts' || $activePage == 'shares') active @endif">
         <a @if ($activePage == 'encodeStocks' || $activePage == 'outworks/parts' || $activePage == 'shares')
               style='color: #332a5c;'
             @endif data-toggle="collapse" href="#others">

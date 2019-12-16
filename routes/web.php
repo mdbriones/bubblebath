@@ -16,21 +16,9 @@ Route::get('/', function () {
 });
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::group(['middleware' => 'auth'], function () {
-	Route::resource('user', 'UserController', ['except' => ['show']]);
-
-	Route::get('carwashInformation', 'CarwashController@showService')->name('carwash.information');
-	Route::post('saveCarwashService', 'CarwashController@store')->name('saveCarwashService');
-	Route::get('carwashHistory', 'CarwashController@showCarwashHistory')->name('carwash.history');
-	Route::get('carwashRecord', 'CarwashController@showRecord')->name('history.record');
-	
-	Route::get('shopInformation', 'ShopController@showShop')->name('shop.information');
-	Route::post('saveShopService', 'ShopController@store')->name('saveShopService');
-	Route::get('shopHistory', 'ShopController@showShopHistory')->name('shop.history');
-	Route::get('shopRecord', 'ShopController@showShopRecord')->name('historyShop.record');
-
+// Route::get('/home', 'HomeController@adminHome')->name('home');
+Route::group(['middleware' => 'is_admin'], function () {
+	Route::get('/home', 'HomeController@adminHome')->name('home')->middleware('is_admin');
 	Route::get('carwashReceivables', 'ReceivablesController@carwash')->name('carwash.receivables');
 	Route::post('updateRowReceivableCarwash', 'ReceivablesController@updatePaidCarwash');
 	Route::get('shopReceivables', 'ReceivablesController@shop')->name('shop.receivables');
@@ -71,10 +59,30 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('getReceivablesCarwash', 'ChartController@getReceivablesCarwash')->name('getReceivablesCarwash');
 	Route::get('getReceivablesShop', 'ChartController@getReceivablesShop')->name('getReceivablesShop');
 	Route::get('getTodayEmployees', 'ChartController@getTodayEmployees')->name('getTodayEmployees');
+	
+	Route::get('getDashboardStocksData', 'ChartController@getDashboardStocksData')->name('getDashboardStocksData');
 
+	Route::post('create', 'ProfileController@create')->name('profile.create');
+	Route::get('getAllUsers', 'ProfileController@getAllUsers')->name('getAllUsers');
+});
+
+Route::group(['middleware' => 'auth'], function () {
+	Route::resource('user', 'UserController', ['except' => ['show']]);
+
+	Route::get('carwashInformation', 'CarwashController@showService')->name('carwash.information');
+	Route::post('saveCarwashService', 'CarwashController@store')->name('saveCarwashService');
+	Route::get('carwashHistory', 'CarwashController@showCarwashHistory')->name('carwash.history');
+	Route::get('carwashRecord', 'CarwashController@showRecord')->name('history.record');
+	
+	Route::get('shopInformation', 'ShopController@showShop')->name('shop.information');
+	Route::post('saveShopService', 'ShopController@store')->name('saveShopService');
+	Route::get('shopHistory', 'ShopController@showShopHistory')->name('shop.history');
+	Route::get('shopRecord', 'ShopController@showShopRecord')->name('historyShop.record');
+
+	
 
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
-	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
+	Route::post('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 	
 	

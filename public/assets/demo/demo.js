@@ -382,113 +382,129 @@ demo = {
         // });
 
 
-        ctx = document.getElementById('lineChartExampleWithNumbersAndGrid').getContext("2d");
+        // ctx = document.getElementById('lineChartExampleWithNumbersAndGrid').getContext("2d");
 
-        gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
-        gradientStroke.addColorStop(0, '#18ce0f');
-        gradientStroke.addColorStop(1, chartColor);
+        // gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
+        // gradientStroke.addColorStop(0, '#18ce0f');
+        // gradientStroke.addColorStop(1, chartColor);
 
-        gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
-        gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
-        gradientFill.addColorStop(1, hexToRGB('#18ce0f', 0.4));
+        // gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
+        // gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
+        // gradientFill.addColorStop(1, hexToRGB('#18ce0f', 0.4));
 
-        myChart = new Chart(ctx, {
-            type: 'line',
-            responsive: true,
-            data: {
-                labels: ["12pm,", "3pm", "6pm", "9pm", "12am", "3am", "6am", "9am"],
-                datasets: [{
-                    label: "Email Stats",
-                    borderColor: "#18ce0f",
-                    pointBorderColor: "#FFF",
-                    pointBackgroundColor: "#18ce0f",
-                    pointBorderWidth: 2,
-                    pointHoverRadius: 4,
-                    pointHoverBorderWidth: 1,
-                    pointRadius: 4,
-                    fill: true,
-                    backgroundColor: gradientFill,
-                    borderWidth: 2,
-                    data: [40, 500, 650, 700, 1200, 1250, 1300, 1900]
-                }]
-            },
-            options: gradientChartOptionsConfigurationWithNumbersAndGrid
-        });
+        // myChart = new Chart(ctx, {
+        //     type: 'line',
+        //     responsive: true,
+        //     data: {
+        //         labels: ["12pm,", "3pm", "6pm", "9pm", "12am", "3am", "6am", "9am"],
+        //         datasets: [{
+        //             label: "Email Stats",
+        //             borderColor: "#18ce0f",
+        //             pointBorderColor: "#FFF",
+        //             pointBackgroundColor: "#18ce0f",
+        //             pointBorderWidth: 2,
+        //             pointHoverRadius: 4,
+        //             pointHoverBorderWidth: 1,
+        //             pointRadius: 4,
+        //             fill: true,
+        //             backgroundColor: gradientFill,
+        //             borderWidth: 2,
+        //             data: [40, 500, 650, 700, 1200, 1250, 1300, 1900]
+        //         }]
+        //     },
+        //     options: gradientChartOptionsConfigurationWithNumbersAndGrid
+        // });
 
-        var e = document.getElementById("barChartSimpleGradientsNumbers").getContext("2d");
+        var stocksDescription = [];
+        var stocksRemaining = [];
+        $.ajax({
+            type : "get",
+            url : "getDashboardStocksData",
+            data : {'foo' : 'foo'},
+            success : function(data){
+                stocksDescription = data[0];
+                stocksRemaining = data[1];
+                
+                var e = document.getElementById("barChartSimpleGradientsNumbers").getContext("2d");
 
-        gradientFill = ctx.createLinearGradient(0, 170, 0, 50);
-        gradientFill.addColorStop(0, "rgba(128, 182, 244, 0)");
-        gradientFill.addColorStop(1, hexToRGB('#2CA8FF', 0.6));
+                gradientFill = e.createLinearGradient(0, 200, 0, 50);
+                gradientFill.addColorStop(0, "rgba(91, 175, 231, 1)");
+                gradientFill.addColorStop(1, hexToRGB('#30f033', 0.8));
 
-        var a = {
-            type: "bar",
-            data: {
-                labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-                datasets: [{
-                    label: "Active Countries",
-                    backgroundColor: gradientFill,
-                    borderColor: "#2CA8FF",
-                    pointBorderColor: "#FFF",
-                    pointBackgroundColor: "#2CA8FF",
-                    pointBorderWidth: 2,
-                    pointHoverRadius: 4,
-                    pointHoverBorderWidth: 1,
-                    pointRadius: 4,
-                    fill: true,
-                    borderWidth: 1,
-                    data: [80, 99, 86, 96, 123, 85, 100, 75, 88, 90, 123, 155]
-                }]
-            },
-            options: {
-                maintainAspectRatio: false,
-                legend: {
-                    display: false
-                },
-                tooltips: {
-                    bodySpacing: 4,
-                    mode: "nearest",
-                    intersect: 0,
-                    position: "nearest",
-                    xPadding: 10,
-                    yPadding: 10,
-                    caretPadding: 10
-                },
-                responsive: 1,
-                scales: {
-                    yAxes: [{
-                        gridLines: 0,
-                        gridLines: {
-                            zeroLineColor: "transparent",
-                            drawBorder: false
-                        }
-                    }],
-                    xAxes: [{
-                        display: 0,
-                        gridLines: 0,
-                        ticks: {
+                let barBg = Array.from({'length': stocksRemaining.length}, (_, i) => stocksRemaining[i] < 10 ? 'red' : gradientFill);
+
+                var a = {
+                    type: "bar",
+                    data: {
+                        labels: stocksDescription,
+                        datasets: [{
+                            label: "Remaining",
+                            backgroundColor: barBg,
+                            borderColor: barBg,
+                            pointBorderColor: "#FFF",
+                            pointBackgroundColor: "#30f033",
+                            pointBorderWidth: 2,
+                            pointHoverRadius: 4,
+                            pointHoverBorderWidth: 1,
+                            pointRadius: 4,
+                            fill: true,
+                            borderWidth: 1,
+                            data: stocksRemaining
+                        }]
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        legend: {
                             display: false
                         },
-                        gridLines: {
-                            zeroLineColor: "transparent",
-                            drawTicks: false,
-                            display: false,
-                            drawBorder: false
+                        tooltips: {
+                            bodySpacing: 4,
+                            mode: "nearest",
+                            intersect: 0,
+                            position: "nearest",
+                            xPadding: 10,
+                            yPadding: 10,
+                            caretPadding: 10
+                        },
+                        responsive: 1,
+                        scales: {
+                            yAxes: [{
+                                gridLines: 0,
+                                gridLines: {
+                                    zeroLineColor: "transparent",
+                                    drawBorder: false
+                                }
+                            }],
+                            xAxes: [{
+                                display: 0,
+                                gridLines: 0,
+                                ticks: {
+                                    display: false
+                                },
+                                gridLines: {
+                                    zeroLineColor: "transparent",
+                                    drawTicks: false,
+                                    display: false,
+                                    drawBorder: false
+                                }
+                            }]
+                        },
+                        layout: {
+                            padding: {
+                                left: 0,
+                                right: 0,
+                                top: 15,
+                                bottom: 15
+                            }
                         }
-                    }]
-                },
-                layout: {
-                    padding: {
-                        left: 0,
-                        right: 0,
-                        top: 15,
-                        bottom: 15
                     }
-                }
+                };
+                var viewsChart = new Chart(e, a);
             }
-        };
+        });
 
-        var viewsChart = new Chart(e, a);
+        
+
     },
 
     initGoogleMaps: function() {

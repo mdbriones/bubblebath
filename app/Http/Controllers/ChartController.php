@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Stocks;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -62,7 +63,13 @@ class ChartController extends Controller
                 ->where('paid','0')
                 ->take(5)
                 ->get();
-        return $chartData;
+
+        $overallTotal = 0;
+        foreach ($chartData as $key => $value) {
+            $overallTotal += $chartData[$key]->totalAmount;
+        }
+
+        return [$chartData, $overallTotal];
     }
 
     public function getReceivablesShop()
@@ -71,6 +78,7 @@ class ChartController extends Controller
                             ->where('date_', '<=', now())
                             ->take(5)
                             ->get();
+        $overallTotal = 0;
         foreach ($chartData as $key => $value) {
             $newDate = date("F d, Y", strtotime($chartData[$key]->date_));
             $now = time();
@@ -78,9 +86,10 @@ class ChartController extends Controller
 			$datediff = $now - $orig_date;
             $aging = round($datediff / (60 * 60 * 24));
             $chartData[$key]->aging = $aging;
+            $overallTotal += $chartData[$key]->service_amount_;
         }
-
-        return $chartData;
+        // dd($overallTotal);
+        return [$chartData, $overallTotal];
     }
 
     public function getTodayEmployees()
@@ -94,5 +103,20 @@ class ChartController extends Controller
         $returnedData[1] = $pm_data;
 
         return $returnedData;
+    }
+
+    public function getDashboardStocksData()
+    {
+        $stocks = Stocks::all();
+        $stocksDesciption = array();
+        $stocksRemaining = array();
+        foreach ($stocks as $key => $value) {
+            array_push($stocksDesciption, $stocks[$key]->description);
+            array_push($stocksRemaining, $stocks[$key]->quantity);
+        }
+        $data[0] = $stocksDesciption;
+        $data[1] = $stocksRemaining;
+
+        return $data;
     }
 }
